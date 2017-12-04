@@ -1,0 +1,2 @@
+rlwrap /usr/local/mit-scheme/bin/mit-scheme
+
