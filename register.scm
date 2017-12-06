@@ -5,12 +5,20 @@
   (pos -1 0)  
   )
 
+#|
+ |This function was found on StackOverflow:
+ |https://stackoverflow.com/questions/16302038/float-precision-and-removing-rounding-errors-in-scheme
+ |#
+(define (round-off z n)
+  (let ((power (expt 10 n)))
+    (/ (round (* power z)) power)))
+
 (define (pos value subtotal)
   (cond
 	((= value 0) 
-	 (newline) (display "Subtotal: $") (display subtotal) (newline)
-	 (display "Tax: $") (display (* tax_rate subtotal)) (newline)
-	 (display "Total: $") (display (* (+ tax_rate 1) subtotal))
+	 (newline) (display "Subtotal: $") (display (round-off subtotal 2)) (newline)
+	 (display "Tax: $") (display (round-off (* tax_rate subtotal) 2)) (newline)
+	 (display "Total: $") (display (round-off (* (+ tax_rate 1) subtotal) 2))
 	 #t)
 	(else
 	  (display "Enter value: ")
